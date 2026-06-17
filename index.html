@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurnia Surya — Data Analyst</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1D9E75;
+      --green-light: #E1F5EE;
+      --green-mid: #0F6E56;
+      --bg: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-tertiary: #f1f3f5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b7280;
+      --border: rgba(0,0,0,0.1);
+      --border-hover: rgba(0,0,0,0.2);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --bg-tertiary: #2e2e2e;
+        --text-primary: #f0f0f0;
+        --text-secondary: #a0aec0;
+        --border: rgba(255,255,255,0.1);
+        --border-hover: rgba(255,255,255,0.25);
+        --green-light: #0a3d2b;
+        --green-mid: #5DCAA5;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 2rem; height: 56px;
+    }
+    .nav-logo { font-size: 16px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text-primary); font-size: 22px; }
+
+    /* HERO */
+    #hero {
+      min-height: 420px;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      max-width: 860px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: 48px; font-weight: 600;
+      color: var(--text-primary); line-height: 1.15; margin-bottom: 1rem;
+    }
+    .hero-name span { color: var(--green); }
+    .hero-tagline {
+      font-size: 17px; color: var(--text-secondary);
+      max-width: 540px; line-height: 1.7; margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      padding: 11px 22px; font-size: 14px; font-weight: 500;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-outline {
+      background: transparent; color: var(--text-primary);
+      border: 0.5px solid var(--border-hover);
+      border-radius: var(--radius-md);
+      padding: 11px 22px; font-size: 14px; font-weight: 500;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: background 0.15s;
+    }
+    .btn-outline:hover { background: var(--bg-secondary); }
+
+    /* SECTIONS */
+    .section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+    .section-wrap { border-bottom: 0.5px solid var(--border); }
+    .section-wrap-alt { border-bottom: 0.5px solid var(--border); background: var(--bg-secondary); }
+    .section-wrap-alt .section { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem;
+    }
+    .section-title { font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 1.75rem; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; }
+    .about-bio { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+    .about-details { display: flex; flex-direction: column; gap: 14px; }
+    .detail-row { display: flex; gap: 12px; font-size: 14px; align-items: flex-start; }
+    .detail-label { color: var(--text-secondary); min-width: 85px; flex-shrink: 0; }
+    .detail-value { color: var(--text-primary); font-weight: 500; }
+    .detail-value a { color: var(--green); text-decoration: none; }
+    .detail-value a:hover { text-decoration: underline; }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--bg-secondary);
+      border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 7px 14px;
+      font-size: 13px; color: var(--text-primary);
+    }
+    .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .project-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem; display: flex; flex-direction: column; gap: 10px;
+      text-decoration: none; transition: border-color 0.15s, transform 0.15s;
+    }
+    .project-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .project-card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .project-tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: var(--radius-md);
+      background: var(--green-light); color: var(--green-mid);
+    }
+    .project-link-icon { font-size: 15px; color: var(--text-secondary); }
+    .project-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+    .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; flex: 1; }
+    .project-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tool-badge {
+      font-size: 11px; background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border-radius: var(--radius-md); padding: 3px 8px;
+      border: 0.5px solid var(--border);
+    }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 1.25rem; }
+    .timeline-left { display: flex; flex-direction: column; align-items: center; min-width: 20px; }
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
+    .timeline-line { flex: 1; width: 1px; background: var(--border); min-height: 24px; margin: 4px 0; }
+    .timeline-body { padding-bottom: 2rem; }
+    .timeline-year { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+    .timeline-role { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+    .timeline-org { font-size: 13px; color: var(--green); margin-bottom: 6px; }
+    .timeline-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .contact-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 14px;
+      text-decoration: none; transition: border-color 0.15s;
+    }
+    .contact-card:hover { border-color: var(--green); }
+    .contact-icon { font-size: 22px; color: var(--green); flex-shrink: 0; }
+    .contact-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
+    .contact-value { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+    footer {
+      padding: 2rem; text-align: center;
+      font-size: 13px; color: var(--text-secondary);
+      border-top: 0.5px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .hero-name { font-size: 32px; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 1rem 1.25rem; gap: 1rem; }
+      .nav-hamburger { display: block; }
+      .section { padding: 3.5rem 1.25rem; }
+      #hero { padding: 3.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">KS.</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <i class="ti ti-menu-2"></i>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div style="border-bottom: 0.5px solid var(--border);">
+  <section id="hero">
+    <p class="hero-eyebrow">Data Analyst · Hacktiv8 Graduate</p>
+    <h1 class="hero-name">Kurnia <span>Surya</span></h1>
+    <p class="hero-tagline">Turning raw data into clear, actionable insight — through analysis, visualization, and well-engineered pipelines.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://drive.google.com/file/d/1K9M-cgtMK2xuXmzUmT-FS7ZySmVyGvOr/view?usp=sharing" target="_blank" rel="noopener">
+        <i class="ti ti-download" style="font-size:16px;"></i> Download CV
+      </a>
+      <a class="btn-outline" href="#projects">
+        <i class="ti ti-folder" style="font-size:16px;"></i> View Projects
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="section-wrap-alt">
+  <div class="section" id="about">
+    <p class="section-label">About</p>
+    <h2 class="section-title">About me</h2>
+    <div class="about-grid">
+      <p class="about-bio">
+        Seorang data analyst lulusan program Hacktiv8 Comprehensive Data Analytics dengan pengalaman mengerjakan proyek end-to-end mulai dari eksplorasi data, inferential statistics, pembuatan dashboard interaktif, hingga membangun pipeline data otomatis. Passionate dalam mengubah data mentah menjadi insight yang berdampak nyata bagi bisnis, dan aktif mengerjakan proyek freelance secara remote.
+      </p>
+      <div class="about-details">
+        <div class="detail-row">
+          <span class="detail-label"><i class="ti ti-user" style="font-size:14px;vertical-align:-2px;margin-right:4px;"></i>Nama</span>
+          <span class="detail-value">Kurnia Surya</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="ti ti-map-pin" style="font-size:14px;vertical-align:-2px;margin-right:4px;"></i>Lokasi</span>
+          <span class="detail-value">Surabaya, Indonesia</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="ti ti-school" style="font-size:14px;vertical-align:-2px;margin-right:4px;"></i>Pendidikan</span>
+          <span class="detail-value">Hacktiv8 Comprehensive Data Analytics</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="ti ti-briefcase" style="font-size:14px;vertical-align:-2px;margin-right:4px;"></i>Status</span>
+          <span class="detail-value">Open to work · Freelance</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="ti ti-mail" style="font-size:14px;vertical-align:-2px;margin-right:4px;"></i>Email</span>
+          <span class="detail-value"><a href="mailto:kurniasuryab@gmail.com">kurniasuryab@gmail.com</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-wrap">
+  <div class="section" id="skills">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">Tech stack</h2>
+    <div class="skills-grid">
+      <span class="skill-pill"><span class="skill-dot"></span>Python</span>
+      <span class="skill-pill"><span class="skill-dot"></span>pandas</span>
+      <span class="skill-pill"><span class="skill-dot"></span>NumPy</span>
+      <span class="skill-pill"><span class="skill-dot"></span>scipy</span>
+      <span class="skill-pill"><span class="skill-dot"></span>matplotlib</span>
+      <span class="skill-pill"><span class="skill-dot"></span>seaborn</span>
+      <span class="skill-pill"><span class="skill-dot"></span>SQL</span>
+      <span class="skill-pill"><span class="skill-dot"></span>PostgreSQL</span>
+      <span class="skill-pill"><span class="skill-dot"></span>MongoDB</span>
+      <span class="skill-pill"><span class="skill-dot"></span>Tableau</span>
+      <span class="skill-pill"><span class="skill-dot"></span>Looker Studio</span>
+      <span class="skill-pill"><span class="skill-dot"></span>Apache Airflow</span>
+      <span class="skill-pill"><span class="skill-dot"></span>AWS S3</span>
+      <span class="skill-pill"><span class="skill-dot"></span>AWS Athena</span>
+      <span class="skill-pill"><span class="skill-dot"></span>dbt</span>
+      <span class="skill-pill"><span class="skill-dot"></span>Git</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section-wrap-alt">
+  <div class="section" id="projects">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Selected work</h2>
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://github.com/kurniasuryab13/Airline_Dissatisfied_Passanger" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <span class="project-tag">Data Analysis</span>
+          <i class="ti ti-external-link project-link-icon"></i>
+        </div>
+        <p class="project-title">Airline Dissatisfied Passenger Analysis</p>
+        <p class="project-desc">Analisis kepuasan penumpang maskapai dari ~103.904 records menggunakan statistik inferensial. Menemukan segmen dissatisfaction tertinggi pada Personal Travel, Eco Class, dan Inflight Wifi.</p>
+        <div class="project-tools">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">pandas</span>
+          <span class="tool-badge">Chi-square</span>
+          <span class="tool-badge">Mann-Whitney U</span>
+          <span class="tool-badge">Tableau</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/kurniasuryab13/Churn_Analysis_Improvement_Rate_Pipeline" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <span class="project-tag">Data Pipeline</span>
+          <i class="ti ti-external-link project-link-icon"></i>
+        </div>
+        <p class="project-title">Churn Analysis & Improvement Rate Pipeline</p>
+        <p class="project-desc">Pipeline analitik end-to-end untuk identifikasi pelanggan churn dan segmentasi target promosi. Dibangun sebagai final project Hacktiv8 dengan orkestrasi Airflow.</p>
+        <div class="project-tools">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">PostgreSQL</span>
+          <span class="tool-badge">Apache Airflow</span>
+          <span class="tool-badge">MongoDB</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/kurniasuryab13/Craiglist-Used-Car-Stock-Analysis" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <span class="project-tag">Data Analysis</span>
+          <i class="ti ti-external-link project-link-icon"></i>
+        </div>
+        <p class="project-title">Craigslist Used Car Stock Analysis</p>
+        <p class="project-desc">Analisis pasar kendaraan bekas dari data Craigslist — mencakup tren harga, distribusi merek, kondisi kendaraan, dan rekomendasi stok optimal.</p>
+        <div class="project-tools">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">pandas</span>
+          <span class="tool-badge">seaborn</span>
+          <span class="tool-badge">Tableau</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/kurniasuryab13/Customer_Shopping_Trends_Data_Pipeline" target="_blank" rel="noopener">
+        <div class="project-card-header">
+          <span class="project-tag">Data Pipeline</span>
+          <i class="ti ti-external-link project-link-icon"></i>
+        </div>
+        <p class="project-title">Customer Shopping Trends Data Pipeline</p>
+        <p class="project-desc">Pipeline data untuk analisis tren belanja pelanggan — dari ingestion hingga transformasi dan visualisasi pola pembelian berdasarkan segmen dan kategori produk.</p>
+        <div class="project-tools">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">PostgreSQL</span>
+          <span class="tool-badge">Apache Airflow</span>
+          <span class="tool-badge">Looker Studio</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap">
+  <div class="section" id="experience">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Education &amp; background</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-body">
+          <p class="timeline-year">Feb – Mei 2026</p>
+          <p class="timeline-role">Comprehensive Data Analytics Program</p>
+          <p class="timeline-org">Hacktiv8 Indonesia</p>
+          <p class="timeline-desc">Program intensif 3 bulan mencakup Python untuk analisis data, SQL, visualisasi data (Tableau, Looker Studio), statistical analysis, serta data engineering dengan Airflow, MongoDB, dan PostgreSQL.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-body">
+          <p class="timeline-year">2026 – sekarang</p>
+          <p class="timeline-role">Freelance Data Analyst</p>
+          <p class="timeline-org">Fiverr · Upwork · Freelancer.com</p>
+          <p class="timeline-desc">Mengerjakan proyek analisis data, pembuatan dashboard interaktif, dan data pipeline untuk klien dari berbagai industri secara remote.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-body">
+          <p class="timeline-year">Next goal</p>
+          <p class="timeline-role">Analytics Engineering</p>
+          <p class="timeline-org">Expanding skill set</p>
+          <p class="timeline-desc">Memperdalam dbt dengan AWS (S3 + Athena) untuk analytics engineering dan modern data stack.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div style="background: var(--bg-secondary); border-bottom: 0.5px solid var(--border);">
+  <div class="section" id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's connect</h2>
+    <div class="contact-grid">
+
+      <a class="contact-card" href="mailto:kurniasuryab@gmail.com">
+        <i class="ti ti-mail contact-icon"></i>
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-value">kurniasuryab@gmail.com</p>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://github.com/kurniasuryab13" target="_blank" rel="noopener">
+        <i class="ti ti-brand-github contact-icon"></i>
+        <div>
+          <p class="contact-label">GitHub</p>
+          <p class="contact-value">github.com/kurniasuryab13</p>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://drive.google.com/file/d/1K9M-cgtMK2xuXmzUmT-FS7ZySmVyGvOr/view?usp=sharing" target="_blank" rel="noopener">
+        <i class="ti ti-file-description contact-icon"></i>
+        <div>
+          <p class="contact-label">Curriculum Vitae</p>
+          <p class="contact-value">Download CV</p>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://www.fiverr.com" target="_blank" rel="noopener">
+        <i class="ti ti-briefcase contact-icon"></i>
+        <div>
+          <p class="contact-label">Freelance</p>
+          <p class="contact-value">Fiverr · Upwork</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Kurnia Surya · Data Analyst</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
