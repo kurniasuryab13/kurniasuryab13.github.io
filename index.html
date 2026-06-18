@@ -132,21 +132,7 @@
 
     /* ===== ABOUT ===== */
     #about-section { background: var(--dark2); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
-    .about-img-wrap {
-      position: relative;
-    }
-    .about-img-placeholder {
-      width: 100%; aspect-ratio: 1;
-      max-width: 380px; margin: 0 auto;
-      background: var(--dark3);
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 1rem;
-    }
-    .about-img-placeholder i { font-size: 80px; color: var(--primary); opacity: 0.4; }
-    .about-img-placeholder p { color: var(--text-muted); font-size: 13px; }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 700px; margin: 0 auto; }
     .about-text h3 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 1rem; }
     .about-text p { color: var(--text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 1.5rem; }
     .about-info { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.75rem; }
@@ -199,13 +185,16 @@
       width: 72px;
     }
     .skill-icon {
-      width: 52px; height: 52px; border-radius: 10px;
-      background: var(--dark3); border: 1px solid var(--border);
+      width: 60px; height: 60px; border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: var(--primary);
+      padding: 10px;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .skill-icon:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .skill-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .skill-item { width: 80px; }
+    .skill-item:hover .skill-icon { border-color: var(--primary); transform: translateY(-3px); }
     .skill-name { font-size: 10px; color: var(--text-muted); text-align: center; }
 
     /* ===== SERVICES ===== */
@@ -344,12 +333,6 @@
     <div class="section-divider"></div>
   </div>
   <div class="about-grid">
-    <div class="about-img-wrap">
-      <div class="about-img-placeholder">
-        <i class="fas fa-user"></i>
-        <p>Profile Photo</p>
-      </div>
-    </div>
     <div class="about-text">
       <h3>Data Analyst based in Surabaya</h3>
       <p>
@@ -418,22 +401,70 @@
     <div class="skills-group" style="margin-top: 2rem;">
       <p class="skills-group-title">Languages, Libraries & Tools</p>
       <div class="skills-icons">
-        <div class="skill-item"><div class="skill-icon">Py</div><span class="skill-name">Python</span></div>
-        <div class="skill-item"><div class="skill-icon">SQL</div><span class="skill-name">SQL</span></div>
-        <div class="skill-item"><div class="skill-icon">pd</div><span class="skill-name">pandas</span></div>
-        <div class="skill-item"><div class="skill-icon">np</div><span class="skill-name">NumPy</span></div>
-        <div class="skill-item"><div class="skill-icon">sp</div><span class="skill-name">scipy</span></div>
-        <div class="skill-item"><div class="skill-icon">mpl</div><span class="skill-name">matplotlib</span></div>
-        <div class="skill-item"><div class="skill-icon">sns</div><span class="skill-name">seaborn</span></div>
-        <div class="skill-item"><div class="skill-icon">Tb</div><span class="skill-name">Tableau</span></div>
-        <div class="skill-item"><div class="skill-icon">LS</div><span class="skill-name">Looker Studio</span></div>
-        <div class="skill-item"><div class="skill-icon">AF</div><span class="skill-name">Airflow</span></div>
-        <div class="skill-item"><div class="skill-icon">PG</div><span class="skill-name">PostgreSQL</span></div>
-        <div class="skill-item"><div class="skill-icon">MG</div><span class="skill-name">MongoDB</span></div>
-        <div class="skill-item"><div class="skill-icon">S3</div><span class="skill-name">AWS S3</span></div>
-        <div class="skill-item"><div class="skill-icon">AT</div><span class="skill-name">Athena</span></div>
-        <div class="skill-item"><div class="skill-icon">dbt</div><span class="skill-name">dbt</span></div>
-        <div class="skill-item"><div class="skill-icon"><i class="fab fa-git-alt"></i></div><span class="skill-name">Git</span></div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+          <span class="skill-name">Python</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL"></div>
+          <span class="skill-name">SQL</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="pandas"></div>
+          <span class="skill-name">pandas</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"></div>
+          <span class="skill-name">NumPy</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/SCIPY_2.svg" alt="scipy"></div>
+          <span class="skill-name">scipy</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="matplotlib"></div>
+          <span class="skill-name">matplotlib</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://seaborn.pydata.org/_images/logo-mark-lightbg.svg" alt="seaborn"></div>
+          <span class="skill-name">seaborn</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau"></div>
+          <span class="skill-name">Tableau</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://www.gstatic.com/analytics-suite/header/suite/v2/ic_data_studio.svg" alt="Looker Studio"></div>
+          <span class="skill-name">Looker Studio</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow"></div>
+          <span class="skill-name">Airflow</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"></div>
+          <span class="skill-name">PostgreSQL</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"></div>
+          <span class="skill-name">MongoDB</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS S3"></div>
+          <span class="skill-name">AWS S3</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Amazon-Athena-Logo.svg" alt="Athena"></div>
+          <span class="skill-name">Athena</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png" alt="dbt"></div>
+          <span class="skill-name">dbt</span>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
+          <span class="skill-name">Git</span>
+        </div>
       </div>
     </div>
   </div>
@@ -633,7 +664,7 @@
   });
 
   // Typing animation
-  const words = ['Data Analyst', 'Data Engineer', 'Dashboard Creator', 'Pipeline Builder'];
+  const words = ['Data Analyst', 'Data Engineer'];
   let wi = 0, ci = 0, deleting = false;
   const el = document.getElementById('typedText');
   function type() {
